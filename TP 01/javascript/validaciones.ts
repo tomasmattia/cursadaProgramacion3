@@ -1,42 +1,38 @@
-function AdministrarValidaciones():boolean
+function AdministrarValidaciones()
 {
-    const dni:number=parseInt((<HTMLInputElement>document.getElementById("txtDni")).value);
-    const legajo:number=parseInt((<HTMLInputElement>document.getElementById("txtLegajo")).value);
-    const sueldo:number=parseInt((<HTMLInputElement>document.getElementById("txtSueldo")).value);
+    const dni:number=Number((<HTMLInputElement>document.getElementById("txtDni")).value);
+    const legajo:number=Number((<HTMLInputElement>document.getElementById("txtLegajo")).value);
+    const sueldo:number=Number((<HTMLInputElement>document.getElementById("txtSueldo")).value);
     const apellido:string=((<HTMLInputElement>document.getElementById("txtApellido")).value);
     const nombre:string=((<HTMLInputElement>document.getElementById("txtNombre")).value);
     const sexo:string=((<HTMLInputElement>document.getElementById("cboSexo")).value);
+    if(!ValidarRangoNumerico(1000000,55000000,dni))
+    {
+        alert("Dni invalido");
+    }
     if(!ValidarCamposVacios(apellido) || !ValidarCamposVacios(nombre))
     {
+        console.log("Falta completar datos");
         alert("Falta completar datos");
-        return false;
     }
     if(!ValidarCombo(sexo))
     {
         alert("Sexo invalido");
-        return false;
     }
     if(!ValidarRangoNumerico(100,550,legajo))
     {
         alert("Legajo invalido");
-        return false;
-    }
-    if(!ValidarRangoNumerico(1000000,55000000,dni))
-    {
-        alert("Dni invalido");
-        return false;
     }
     if(!ValidarRangoNumerico(8000,ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()),sueldo))
     {
-        alert("Dni invalido");
-        return false;
+        alert("Sueldo invalido");
     }
-    return true;
 }
 
 function ValidarCamposVacios(campo:string):boolean
 {
-    if(campo.match(/[a-z]/)) {
+    if(campo!="")
+    {
         return true;
     }
     return false;
@@ -44,7 +40,7 @@ function ValidarCamposVacios(campo:string):boolean
 
 function ValidarRangoNumerico(min:number,max:number,num:number):boolean
 {
-    if(num>min && num<max)
+    if(num>=min && num<=max)
     {
         return true;
     }

@@ -1,47 +1,39 @@
 function AdministrarValidaciones() {
-    var dni = parseInt(document.getElementById("txtDni").value);
-    var legajo = parseInt(document.getElementById("txtLegajo").value);
-    var sueldo = parseInt(document.getElementById("txtSueldo").value);
+    var dni = Number(document.getElementById("txtDni").value);
+    var legajo = Number(document.getElementById("txtLegajo").value);
+    var sueldo = Number(document.getElementById("txtSueldo").value);
     var apellido = (document.getElementById("txtApellido").value);
     var nombre = (document.getElementById("txtNombre").value);
     var sexo = (document.getElementById("cboSexo").value);
+    if (!ValidarRangoNumerico(1000000, 55000000, dni)) {
+        alert("Dni invalido");
+    }
     if (!ValidarCamposVacios(apellido) || !ValidarCamposVacios(nombre)) {
+        console.log("Falta completar datos");
         alert("Falta completar datos");
-        return false;
     }
     if (!ValidarCombo(sexo)) {
         alert("Sexo invalido");
-        return false;
     }
     if (!ValidarRangoNumerico(100, 550, legajo)) {
         alert("Legajo invalido");
-        return false;
-    }
-    if (!ValidarRangoNumerico(1000000, 55000000, dni)) {
-        alert("Dni invalido");
-        return false;
     }
     if (!ValidarRangoNumerico(8000, ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()), sueldo)) {
-        alert("Dni invalido");
-        return false;
+        alert("Sueldo invalido");
     }
-    return true;
 }
-
 function ValidarCamposVacios(campo) {
-    if (campo.match(/[a-z]/)) {
+    if (campo != "") {
         return true;
     }
     return false;
 }
-
 function ValidarRangoNumerico(min, max, num) {
-    if (num > min && num < max) {
+    if (num >= min && num <= max) {
         return true;
     }
     return false;
 }
-
 function ValidarCombo(sexo, defecto) {
     if (defecto === void 0) { defecto = "default"; }
     if (sexo != defecto) {
@@ -49,7 +41,6 @@ function ValidarCombo(sexo, defecto) {
     }
     return false;
 }
-
 function ObtenerTurnoSeleccionado() {
     if (document.getElementById("tManana").checked) {
         return "Manana";
@@ -65,7 +56,6 @@ function ObtenerTurnoSeleccionado() {
         }
     }
 }
-
 function ObtenerSueldoMaximo(turno) {
     switch (turno) {
         case "Manana":

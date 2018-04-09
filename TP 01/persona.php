@@ -38,7 +38,7 @@
 
         public function ToString()
         {
-            return $this->_apellido." - ".$this->_nombre." - ".$this->_dni." - ".$this->_sexo;
+            return $this->_apellido."-".$this->_nombre."-".$this->_dni."-".$this->_sexo;
         }
     }
 ?>
