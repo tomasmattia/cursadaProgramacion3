@@ -1,14 +1,15 @@
 <?php
     require("./empleado.php");
+    require_once "interfaces.php";
     class Fabrica 
     {
         private $_cantidadMaxima;
         private $_empleados=array();
         private $_razonSocial;
 
-        public function __construct($razonSocial)
+        public function __construct($razonSocial,$cantidadMaxima=5)
         {
-            $this->_cantidadMaxima=5;
+            $this->_cantidadMaxima=$cantidadMaxima;
             $this->_empleados=array();
             $this->_razonSocial=$razonSocial;
         }
@@ -39,6 +40,7 @@
             if($index=array_search($empleado,$this->_empleados))
             {
                 unset($this->_empleados[$index]);
+                return true;
             }
             return false;
         }
@@ -59,6 +61,39 @@
                 $stringRetorno = $stringRetorno."</br>".$empleado->ToString();
             }
             return $stringRetorno;
+        }
+
+        public function GuardarEnArchivo($nombreDeArchivo){
+            $rutaArchivo="./archivos/".$nombreDeArchivo;
+            $elArchivo=fopen($rutaArchivo,"w");
+            $auxString = "";
+            foreach($this->_empleados as $unEmpleado)
+            {
+                $auxString=$auxString.$unEmpleado->ToString()."\r\n";
+            }
+            if(!(fwrite($elArchivo, $auxString)))
+            {
+                fclose($elArchivo);            
+                return false;
+            }
+            fclose($elArchivo);        
+            return true;
+        }
+
+        public function TraerDeArchivo($nombreDeArchivo){
+            $rutaArchivo="./archivos/".$nombreDeArchivo;
+            $elArchivo=fopen($rutaArchivo,"r");
+            while(!feof($elArchivo))
+            {
+                $empleadoString=trim(fgets($elArchivo));
+                if($empleadoString!="")
+                {
+                    $datoEmpleado=explode("-",$empleadoString);
+                    $empleado = new Empleado($datoEmpleado[0],$datoEmpleado[1],$datoEmpleado[2],$datoEmpleado[3],$datoEmpleado[4],$datoEmpleado[5],$datoEmpleado[6]);
+                    $this->AgregarEmpleado($empleado);
+                }
+            }
+            fclose($elArchivo);
         }
     }
 ?>
