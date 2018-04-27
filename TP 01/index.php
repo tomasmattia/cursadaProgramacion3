@@ -1,65 +1,96 @@
 <?php
-include_once "fabrica.php";
-$empleado1 = new Empleado("Vangioni","Leonel",35334042,'M',10,50000,"Mañana");
-$empleado2 = new Empleado("Funes","Ramiro",35334043,'M',10,50000,"Tarde");
-$empleado3 = new Empleado("Mercado","Gabriel",35334044,'M',10,50000,"Noche");
-$empleado4 = new Empleado("Maidana","Jonatan",35334045,'M',10,50000,"Mañana");
-$empleado5 = new Empleado("Perez","Juan",35334046,'M',10,50000,"Noche");
-$empleado6 = new Empleado("Lopez","Jorge",35334047,'M',10,50000,"Tarde");
-echo "******************************EMPLEADOS******************************<br>";
-echo $empleado1->ToString();
-echo "<br>";
-echo $empleado1->Hablar("Español, Inglés y Frances");
-echo "<br>";
-echo "<br>";
-echo "******************************CARGA EMPLEADOS******************************<br>";
-$unaFabrica = new Fabrica("La Fábrica del PHP");
-if($unaFabrica->AgregarEmpleado($empleado1)){}
-else{
-    echo "No se pueden tomar mas empleados";
-}
-if($unaFabrica->AgregarEmpleado($empleado2)){}
-else{
-    echo "No se pueden tomar mas empleados";
-}
-if($unaFabrica->AgregarEmpleado($empleado3)){}
-else{
-    echo "No se pueden tomar mas empleados";
-}
-if($unaFabrica->AgregarEmpleado($empleado3)){}
-else{
-    echo "No se pueden tomar mas empleados";
-}
-if($unaFabrica->AgregarEmpleado($empleado4)){}
-else{
-    echo "No se pueden tomar mas empleados";
-}
-if($unaFabrica->AgregarEmpleado($empleado5)){
-    echo $unaFabrica->ToString();
-}
-else{
-    echo "No se pueden tomar mas empleados";
-}
-echo "<br>";
-if($unaFabrica->AgregarEmpleado($empleado6)){}
-else{
-        echo "No se pueden tomar mas empleados";
-}
-echo "<br>";
-echo "<br>";
-echo "******************************CALCULAR SUELDOS******************************<br>";
-echo $unaFabrica->CalcularSueldos();
-echo "<br>";
-echo "<br>";
-
-echo "******************************ELIMINAR EMPLEADO******************************<br>";
-if($unaFabrica->EliminarEmpleado($empleado5)){
-    echo "Empleado 3 eliminado con éxito <br> <br>";
-}
-echo $unaFabrica->ToString();
-echo "<br>";
-echo "<br>";
-echo "******************************NUEVOS SUELDOS******************************<br>";
-echo $unaFabrica->CalcularSueldos();
-
+    include_once('./backend/validarSesion.php');
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <title>HTML 5 – Formulario Alta Empleado </title>
+    <script src="javascript/funciones.js"></script>
+</head>
+<body>
+    <h2 align="center">Alta Empleados</h2>
+    <form method="post" action="backend/administracion.php" onsubmit="return AdministrarValidaciones()" enctype="multipart/from-data">
+        <table align="center">      
+            <tr><td><h4>  Datos Personales</h4></td></tr>
+            <tr><td colspan="2"><hr></td></tr>
+        
+            <tr>
+                <td>DNI</td>
+                <td>
+                    <input type="number" name="txtDni" id="txtDni" min="1000000" max="55000000">
+                    <span style="display:none">*</span>
+                </td>
+                
+            </tr>
+            <tr>
+                <td>Apellido</td>
+                <td>
+                    <input type="text" name="txtApellido" id="txtApellido">
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Nombre</td>
+                <td>
+                    <input type="text" name="txtNombre" id="txtNombre">
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Sexo</td>
+                <td>
+                    <select name="cboSexo" id="cboSexo">
+                    <option value="default">Seleccione(---)</option>
+                    <option value="masculino">Masculino(M)</option>
+                    <option value="femenino">Femenino(F)</option>
+                    </select>
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+            <tr><td><h4><br>Datos Laborales</h4></td></tr>
+            <tr><td colspan="2"><hr></td></tr>
+            <tr>
+                <td>Legajo</td>
+                <td>
+                    <input type="number" name="txtLegajo" id="txtLegajo" min="100" max="550">
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Sueldo</td>
+                <td>
+                    <input type="number" name="txtSueldo" id="txtSueldo" min="8000" step="500">
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Turno</td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="rdoTurno" id="tManana" value="tManana">Mañana</td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="rdoTurno" id="tTarde" value="tTarde">Tarde</td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="rdoTurno" id="tNoche" value="tNoche">Noche</td>
+            </tr>
+            <tr>
+                <td><input type="reset" name="btnLimpiar" value="Limpiar"></td>
+                <td><input type="submit" name="btnEnviar" value="Enviar"></td>
+            </tr>
+            <tr>
+                <td>Foto</td>
+                <td>
+                    <input type="file" name="pathFoto" id="pathFoto">
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <a href="./backend/cerrarSesion.php">Desloguearse</a>
+</body>
+</html>

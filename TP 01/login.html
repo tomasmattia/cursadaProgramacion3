@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 – Formulario Login</title>
+    <script src="javascript/funciones.js"></script>
+</head>
+<body>
+    <h2 align="center">Login</h2>
+    <form method="post" action="backend/verificarUsuario.php" onsubmit="return AdministrarValidacionesLogin()">
+        <table align="center">
+            <thead><tr><h4 align="center">Ingreso credenciales</h4></tr></thead>
+            <tr><td colspan="2"><hr></td></tr>
+            <tr>
+                <td><p>DNI</p></td>
+                <td>
+                    <input type="number" name="" id="txtDni" min="1000000" max="55000000">
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+            <tr>
+                <td><p>Apellido</p></td>
+                <td>
+                    <input type="text" name="" id="txtApellido">
+                    <span style="display:none">*</span>
+                </td>
+            </tr>
+            <tr><td colspan="2"><hr></td></tr>
+            <tr><td><button type="reset">Limpiar</button></td></tr>
+            <tr><td><button type="submit">Enviar</button></td></tr>            
+        </table>
+    </form>
+</body>
+</html>

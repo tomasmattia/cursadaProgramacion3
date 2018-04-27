@@ -5,22 +5,27 @@ function AdministrarValidaciones() {
     var apellido = (document.getElementById("txtApellido").value);
     var nombre = (document.getElementById("txtNombre").value);
     var sexo = (document.getElementById("cboSexo").value);
-    if (!ValidarRangoNumerico(1000000, 55000000, dni)) {
-        alert("Dni invalido");
-    }
-    if (!ValidarCamposVacios(apellido) || !ValidarCamposVacios(nombre)) {
-        console.log("Falta completar datos");
-        alert("Falta completar datos");
-    }
-    if (!ValidarCombo(sexo)) {
-        alert("Sexo invalido");
-    }
-    if (!ValidarRangoNumerico(100, 550, legajo)) {
-        alert("Legajo invalido");
-    }
-    if (!ValidarRangoNumerico(8000, ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()), sueldo)) {
-        alert("Sueldo invalido");
-    }
+    var pathFoto = (document.getElementById("pathFoto").value);
+    AdministrarSpanError("txtApellido", !ValidarCamposVacios(apellido));
+    AdministrarSpanError("txtNombre", !ValidarCamposVacios(nombre));
+    AdministrarSpanError("txtLegajo", !ValidarCamposVacios(legajo.toString()));
+    AdministrarSpanError("txtDni", !ValidarCamposVacios(dni.toString()));
+    AdministrarSpanError("txtSueldo", !ValidarCamposVacios(sueldo.toString()));
+    AdministrarSpanError("cboSexo", !ValidarCamposVacios(sexo.toString()));
+    AdministrarSpanError("txtDni", !ValidarRangoNumerico(1000000, 55000000, dni));
+    AdministrarSpanError("cboSexo", !ValidarCombo(sexo));
+    AdministrarSpanError("txtLegajo", !ValidarRangoNumerico(100, 550, legajo));
+    AdministrarSpanError("txtSueldo", !ValidarRangoNumerico(8000, ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()), sueldo));
+    AdministrarSpanError("txtNombre", !ValidarCamposVacios(pathFoto));
+    return VerificarValidacionesLogin();
+}
+function AdministrarValidacionesLogin() {
+    var dni = Number(document.getElementById("txtDni").value);
+    var apellido = (document.getElementById("txtApellido").value);
+    AdministrarSpanError("txtDni", !ValidarCamposVacios(dni.toString()));
+    AdministrarSpanError("txtDni", !ValidarRangoNumerico(1000000, 55000000, dni));
+    AdministrarSpanError("txtApellido", !ValidarCamposVacios(apellido));
+    return VerificarValidacionesLogin();
 }
 function ValidarCamposVacios(campo) {
     if (campo != "") {
@@ -66,4 +71,23 @@ function ObtenerSueldoMaximo(turno) {
             return 25000;
     }
     return 0;
+}
+function AdministrarSpanError(unId, bandera) {
+    if (bandera) {
+        document.getElementById(unId).nextElementSibling.style.display = "block";
+    }
+    else {
+        document.getElementById(unId).nextElementSibling.style.display = "none";
+    }
+}
+function VerificarValidacionesLogin() {
+    var boolRetorno = true;
+    var todoSpan = document.querySelectorAll("span");
+    for (var i = 0; i < todoSpan.length; i++) {
+        if (todoSpan[i].style.display == "block") {
+            boolRetorno = false;
+            break;
+        }
+    }
+    return boolRetorno;
 }

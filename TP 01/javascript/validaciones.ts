@@ -1,4 +1,4 @@
-function AdministrarValidaciones()
+function AdministrarValidaciones():boolean
 {
     const dni:number=Number((<HTMLInputElement>document.getElementById("txtDni")).value);
     const legajo:number=Number((<HTMLInputElement>document.getElementById("txtLegajo")).value);
@@ -6,27 +6,32 @@ function AdministrarValidaciones()
     const apellido:string=((<HTMLInputElement>document.getElementById("txtApellido")).value);
     const nombre:string=((<HTMLInputElement>document.getElementById("txtNombre")).value);
     const sexo:string=((<HTMLInputElement>document.getElementById("cboSexo")).value);
-    if(!ValidarRangoNumerico(1000000,55000000,dni))
-    {
-        alert("Dni invalido");
-    }
-    if(!ValidarCamposVacios(apellido) || !ValidarCamposVacios(nombre))
-    {
-        console.log("Falta completar datos");
-        alert("Falta completar datos");
-    }
-    if(!ValidarCombo(sexo))
-    {
-        alert("Sexo invalido");
-    }
-    if(!ValidarRangoNumerico(100,550,legajo))
-    {
-        alert("Legajo invalido");
-    }
-    if(!ValidarRangoNumerico(8000,ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()),sueldo))
-    {
-        alert("Sueldo invalido");
-    }
+    const pathFoto:string=((<HTMLInputElement>document.getElementById("pathFoto")).value);
+    
+    AdministrarSpanError("txtApellido",!ValidarCamposVacios(apellido));
+    AdministrarSpanError("txtNombre",!ValidarCamposVacios(nombre));
+    AdministrarSpanError("txtLegajo",!ValidarCamposVacios(legajo.toString()));
+    AdministrarSpanError("txtDni",!ValidarCamposVacios(dni.toString()));
+    AdministrarSpanError("txtSueldo",!ValidarCamposVacios(sueldo.toString()));
+    AdministrarSpanError("cboSexo",!ValidarCamposVacios(sexo.toString()));
+    AdministrarSpanError("txtDni",!ValidarRangoNumerico(1000000,55000000,dni));
+    AdministrarSpanError("cboSexo",!ValidarCombo(sexo));
+    AdministrarSpanError("txtLegajo",!ValidarRangoNumerico(100,550,legajo));
+    AdministrarSpanError("txtSueldo",!ValidarRangoNumerico(8000,ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()),sueldo));
+    AdministrarSpanError("txtNombre",!ValidarCamposVacios(pathFoto));
+
+    return VerificarValidacionesLogin();
+}
+
+function AdministrarValidacionesLogin()
+{
+    const dni:number=Number((<HTMLInputElement>document.getElementById("txtDni")).value);
+    const apellido:string=((<HTMLInputElement>document.getElementById("txtApellido")).value);
+    AdministrarSpanError("txtDni",!ValidarCamposVacios(dni.toString()));
+    AdministrarSpanError("txtDni",!ValidarRangoNumerico(1000000,55000000,dni));
+    AdministrarSpanError("txtApellido",!ValidarCamposVacios(apellido));
+
+    return VerificarValidacionesLogin();
 }
 
 function ValidarCamposVacios(campo:string):boolean
@@ -87,4 +92,32 @@ function ObtenerSueldoMaximo(turno:string):number
             return 25000;
     }
     return 0;
+}
+
+function AdministrarSpanError(unId:string, bandera:boolean):void
+{
+    if(bandera)
+    {
+        (<HTMLElement>(<HTMLElement>document.getElementById(unId)).nextElementSibling).style.display="block";
+    }
+    else
+    {
+        (<HTMLElement>(<HTMLElement>document.getElementById(unId)).nextElementSibling).style.display="none";
+    }
+}
+
+function VerificarValidacionesLogin(): boolean {
+    let boolRetorno = true;
+    let todoSpan: NodeList = document.querySelectorAll("span");
+
+    for(let i=0;i<todoSpan.length;i++)
+    {
+        if((<HTMLSpanElement>todoSpan[i]).style.display=="block")
+        {
+            boolRetorno=false;
+            break;
+        }
+    }
+
+    return boolRetorno;
 }
