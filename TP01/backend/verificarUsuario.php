@@ -8,7 +8,7 @@ if(isset($_POST['apellido']) && isset($_POST['dni']))
         $datoEmpleado=explode("-",fgets($elArchivo));
         if(trim($datoEmpleado[0]!=""))
         {
-            if($_POST['apellido']==$datoEmpleado[1] && $_POST['dni']==$datoEmpleado[2])
+            if($_POST['apellido']==$datoEmpleado[0] && $_POST['dni']==$datoEmpleado[2])
             {
                 $_SESSION['dniEmpleado']=$_POST['dni'];
                 header("Location:./mostrar.php");

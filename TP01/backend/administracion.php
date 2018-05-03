@@ -1,7 +1,10 @@
 <?php
     include_once("fabrica.php");
-    $foto=pathinfo($_FILES['pathFoto']['name']);
+    $foto=pathinfo($_FILES['fotito']['name']);
+    var_dump($_POST);
+    var_dump($_POST['fotito']);
     $rutaFoto="../fotos/".$_POST['txtDni']."-".$_POST['txtApellido'].".".$foto['extension'];
+    var_dump($rutaFoto);
     if($foto['extension']!='jpg' && $foto['extension']!='png' && $foto['extension']!='jpeg' && $foto['extension']!='gif' && $foto['extension']!='bmp')
     {
         echo "Extension invalida";
@@ -24,7 +27,7 @@
         {
             if($fabrica->GuardarEnArchivo("empleados.txt"))
             {
-                move_uploaded_file($_FILES['foto']['tmp_name'],$rutaFoto);
+                move_uploaded_file($_FILES['fotito']['tmp_name'],$rutaFoto);
                 ?><a href=./mostrar.php>Empleado cargado - Mostrar</a><?php          
             }
             else

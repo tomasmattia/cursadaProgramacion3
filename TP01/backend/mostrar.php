@@ -2,6 +2,9 @@
     session_start();
     require_once "./fabrica.php";
     require_once "./validarSesion.php";
+    $fabrica= new fabrica("La pequenia fabrica del PHP",7);
+    $fabrica->TraerDeArchivo();
+    $empleados = $fabrica->GetEmpleados();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,9 +22,13 @@
         <h2 align="center">Listado de Empleados</h2>
         <table align="center">
             <thead><h2 align="center">Info</h2></thead>
-            <tr><td colspan="2"><hr></td></tr>           
+            <tr><td colspan="3"><hr></td></tr>           
             <?php
-                while(!feof($elArchivo))
+                foreach($empleados as $emp)
+                {
+                    echo "<tr><td>".$emp->ToString()."</td>"."<td><img src='".$emp->GetPathFoto().".jpg' alt='".$emp->GetApellido()."' style='width:90px;height:90px;'></td><td> - <a href='eliminar.php?id=".$emp->GetLegajo()."'>Eliminar</a></td></tr>"; 
+                }
+                /*while(!feof($elArchivo))
                 {
                     $empleadoString=trim(fgets($elArchivo));
                     if($empleadoString)
@@ -30,11 +37,12 @@
                         echo "<tr><td>".$empleadoString."</td><td> - <a href='eliminar.php?id=".$datoEmpleado[4]."'>Eliminar</a></td></tr>";
                     }
                 }
-                fclose($elArchivo);
+                fclose($elArchivo);*/
+
             ?> 
-            <tr><td colspan="2"><hr></td></tr>
-            <tr><td><a href='../index.html'>Inicio</a></td></tr>
+            <tr><td colspan="3"><hr></td></tr>
+            <tr><td><a href='../index.php'>Inicio</a></td></tr>
         </table>
-    <a href="./backend/cerrarSesion.php">Desloguearse</a>
+    <a href="./cerrarSesion.php">Desloguearse</a>
 </body>
 </html>

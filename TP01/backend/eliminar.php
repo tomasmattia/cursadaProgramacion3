@@ -12,7 +12,8 @@
             $datoEmpleado=explode("-",$empleadoString);
             if($datoEmpleado[4]==$legajo)
             {
-                $empleado = new Empleado($datoEmpleado[0],$datoEmpleado[1],$datoEmpleado[2],$datoEmpleado[3],$datoEmpleado[4],$datoEmpleado[5],$datoEmpleado[6]);                                         
+                $empleado = new Empleado($datoEmpleado[0],$datoEmpleado[1],$datoEmpleado[2],$datoEmpleado[3],$datoEmpleado[4],$datoEmpleado[5],$datoEmpleado[6]);
+                $empleado->SetPathFoto(trim("../fotos/".$datoEmpleado[2]."-".$datoEmpleado[0]));                        
                 break;
             }
         }

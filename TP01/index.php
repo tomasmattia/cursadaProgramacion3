@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once('./backend/validarSesion.php');
 ?>
 <!DOCTYPE html>
@@ -12,7 +13,7 @@
 </head>
 <body>
     <h2 align="center">Alta Empleados</h2>
-    <form method="post" action="backend/administracion.php" onsubmit="return AdministrarValidaciones()" enctype="multipart/from-data">
+    <form enctype="multipart/from-data" method="post" action="backend/administracion.php" onsubmit="return AdministrarValidaciones()" >
         <table align="center">      
             <tr><td><h4>  Datos Personales</h4></td></tr>
             <tr><td colspan="2"><hr></td></tr>
@@ -79,16 +80,17 @@
                 <td><input type="radio" name="rdoTurno" id="tNoche" value="tNoche">Noche</td>
             </tr>
             <tr>
-                <td><input type="reset" name="btnLimpiar" value="Limpiar"></td>
-                <td><input type="submit" name="btnEnviar" value="Enviar"></td>
-            </tr>
-            <tr>
                 <td>Foto</td>
                 <td>
-                    <input type="file" name="pathFoto" id="pathFoto">
+                    <input type="file" name="fotito" id="fotito">
                     <span style="display:none">*</span>
                 </td>
             </tr>
+            <tr>
+                <td><input type="reset" name="btnLimpiar" value="Limpiar"></td>
+                <td><input type="submit" name="btnEnviar" value="Enviar"></td>
+            </tr>
+            
         </table>
     </form>
     <a href="./backend/cerrarSesion.php">Desloguearse</a>

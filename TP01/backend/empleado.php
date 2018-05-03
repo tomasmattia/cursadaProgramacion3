@@ -35,9 +35,9 @@
             return $this->_pathFoto;
         }
 
-        public function SetPathFoto()
+        public function SetPathFoto($pathFoto)
         {
-            return $this->_pathFoto;
+            $this->_pathFoto=$pathFoto;
         }
 
         public function Hablar($idioma)

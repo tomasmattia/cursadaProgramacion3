@@ -38,6 +38,7 @@
         public function EliminarEmpleado($empleado)
         {
             $index=array_search($empleado,$this->_empleados);
+            var_dump($index);
             if($index!==false)
             {
                 unset($this->_empleados[$index]);
@@ -97,7 +98,7 @@
                 {
                     $datoEmpleado=explode("-",$empleadoString);
                     $empleado = new Empleado($datoEmpleado[0],$datoEmpleado[1],$datoEmpleado[2],$datoEmpleado[3],$datoEmpleado[4],$datoEmpleado[5],$datoEmpleado[6]);
-                    $empNuevo->SetPathFoto(trim('/fotos/'.$empString[7]."-".$empString[8]));
+                    $empleado->SetPathFoto(trim("../fotos/".$datoEmpleado[2]."-".$datoEmpleado[0]));
                     $this->AgregarEmpleado($empleado);
                 }
             }
