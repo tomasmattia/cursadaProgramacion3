@@ -6,6 +6,7 @@ function AdministrarValidaciones():boolean
     const apellido:string=((<HTMLInputElement>document.getElementById("txtApellido")).value);
     const nombre:string=((<HTMLInputElement>document.getElementById("txtNombre")).value);
     const sexo:string=((<HTMLInputElement>document.getElementById("cboSexo")).value);
+    const imagen:string=((<HTMLInputElement>document.getElementById("imagen")).value);
     
     AdministrarSpanError("txtApellido",!ValidarCamposVacios(apellido));
     AdministrarSpanError("txtNombre",!ValidarCamposVacios(nombre));
@@ -17,6 +18,7 @@ function AdministrarValidaciones():boolean
     AdministrarSpanError("cboSexo",!ValidarCombo(sexo));
     AdministrarSpanError("txtLegajo",!ValidarRangoNumerico(100,550,legajo));
     AdministrarSpanError("txtSueldo",!ValidarRangoNumerico(8000,ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()),sueldo));
+    AdministrarSpanError("txtApellido",!ValidarCamposVacios(apellido));
 
     return VerificarValidacionesLogin();
 }

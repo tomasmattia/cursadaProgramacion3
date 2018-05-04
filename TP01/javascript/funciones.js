@@ -5,6 +5,7 @@ function AdministrarValidaciones() {
     var apellido = (document.getElementById("txtApellido").value);
     var nombre = (document.getElementById("txtNombre").value);
     var sexo = (document.getElementById("cboSexo").value);
+    var imagen = (document.getElementById("imagen").value);
     AdministrarSpanError("txtApellido", !ValidarCamposVacios(apellido));
     AdministrarSpanError("txtNombre", !ValidarCamposVacios(nombre));
     AdministrarSpanError("txtLegajo", !ValidarCamposVacios(legajo.toString()));
@@ -15,6 +16,7 @@ function AdministrarValidaciones() {
     AdministrarSpanError("cboSexo", !ValidarCombo(sexo));
     AdministrarSpanError("txtLegajo", !ValidarRangoNumerico(100, 550, legajo));
     AdministrarSpanError("txtSueldo", !ValidarRangoNumerico(8000, ObtenerSueldoMaximo(ObtenerTurnoSeleccionado()), sueldo));
+    AdministrarSpanError("txtApellido", !ValidarCamposVacios(apellido));
     return VerificarValidacionesLogin();
 }
 function AdministrarValidacionesLogin() {

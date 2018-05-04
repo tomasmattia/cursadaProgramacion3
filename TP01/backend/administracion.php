@@ -1,15 +1,16 @@
 <?php
+    define('KB', 1024);
     include_once("fabrica.php");
-    $foto=pathinfo($_FILES['fotito']['name']);
+    $foto=pathinfo($_FILES['imagen']['name']);
     var_dump($_POST);
-    var_dump($_POST['fotito']);
-    $rutaFoto="../fotos/".$_POST['txtDni']."-".$_POST['txtApellido'].".".$foto['extension'];
+    var_dump($foto);
+    $rutaFoto="../fotos/".$_POST['txtDni']."-".$_POST['txtApellido'].".jpg";
     var_dump($rutaFoto);
     if($foto['extension']!='jpg' && $foto['extension']!='png' && $foto['extension']!='jpeg' && $foto['extension']!='gif' && $foto['extension']!='bmp')
     {
         echo "Extension invalida";
     }
-    else if($foto['size']>1024)
+    else if(filesize($_FILES['imagen']['size'])>5*KB)
     {
         echo "Foto demasiado pesada";
     }
@@ -27,7 +28,7 @@
         {
             if($fabrica->GuardarEnArchivo("empleados.txt"))
             {
-                move_uploaded_file($_FILES['fotito']['tmp_name'],$rutaFoto);
+                move_uploaded_file($_FILES['imagen']['tmp_name'],$rutaFoto);
                 ?><a href=./mostrar.php>Empleado cargado - Mostrar</a><?php          
             }
             else

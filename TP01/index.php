@@ -13,7 +13,7 @@
 </head>
 <body>
     <h2 align="center">Alta Empleados</h2>
-    <form enctype="multipart/from-data" method="post" action="backend/administracion.php" onsubmit="return AdministrarValidaciones()" >
+    <form enctype="multipart/form-data" method="post" action="backend/administracion.php" onsubmit="return AdministrarValidaciones()" >
         <table align="center">      
             <tr><td><h4>  Datos Personales</h4></td></tr>
             <tr><td colspan="2"><hr></td></tr>
@@ -82,7 +82,7 @@
             <tr>
                 <td>Foto</td>
                 <td>
-                    <input type="file" name="fotito" id="fotito">
+                    <input type="file" name="imagen" id="imagen">
                     <span style="display:none">*</span>
                 </td>
             </tr>
