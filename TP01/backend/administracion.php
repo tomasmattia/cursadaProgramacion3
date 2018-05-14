@@ -1,6 +1,41 @@
 <?php
     define('KB', 1024);
     include_once("fabrica.php");
+    $hdnModificar = $_POST['hdnModificar'];
+    
+    if(isset($_POST['hdnModificar'])) 
+    {
+        $ruta = "../archivos/empleados.txt";
+        $archivoDeEmpleados = fopen($ruta, "r");
+        while (!feof($archivoDeEmpleados)) 
+        {
+            $lineaDeTexto = trim(fgets($archivoDeEmpleados));
+            if ($lineaDeTexto) 
+            {
+                $datoEmpleado = explode("-", $lineaDeTexto);
+                if ($datoEmpleado[2] == $_POST['txtDni']) 
+                {
+                    $unEmpleado = new Empleado($datoEmpleado[0], $datoEmpleado[1], $datoEmpleado[2], $datoEmpleado[3], $datoEmpleado[4], $datoEmpleado[5], $datoEmpleado[6]);
+                    $unEmpleado->SetPathFoto(trim("../fotos/".$datoEmpleado[2]."-".$datoEmpleado[0]));
+                    break;
+                    echo "encontrado";
+                }
+            }
+        }
+        fclose($archivoDeEmpleados);
+        $laFabrica = new Fabrica("La pequenia fabrica del PHP", 7);
+        $laFabrica->TraerDeArchivo("empleados.txt");
+        if ($laFabrica->EliminarEmpleado($unEmpleado)) 
+        {
+            $laFabrica->GuardarEnArchivo("empleados.txt");
+            if (!unlink($unEmpleado->GetPathFoto().".jpg")) 
+            {
+                echo "Hubo un error al eliminar el empleado";
+            }
+            echo "eliminado";
+        }
+    }
+
     $foto=pathinfo($_FILES['imagen']['name']);
     var_dump($_POST);
     var_dump($foto);

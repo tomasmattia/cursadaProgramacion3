@@ -91,3 +91,42 @@ function VerificarValidacionesLogin() {
     }
     return boolRetorno;
 }
+function AdministrarModificar(dniEmpleado) {
+    document.getElementById("hidModificar").value = dniEmpleado;
+    document.getElementById("frmModificar").submit();
+}
+function ModificarEmpleado(dni, apellido, nombre, sexo, legajo, sueldo, turno, foto) {
+    var turnoSeleccionado = turno;
+    var sexoSeleccionado = 0;
+    switch (sexo) {
+        case "Masculino":
+            sexoSeleccionado = 1;
+            break;
+        case "Femenino":
+            sexoSeleccionado = 2;
+            break;
+    }
+    switch (turno) {
+        case "tManana":
+            turnoSeleccionado = "tManana";
+            break;
+        case "tTarde":
+            turnoSeleccionado = "tTarde";
+            break;
+        case "tNoche":
+            turnoSeleccionado = "tNoche";
+            break;
+    }
+    document.title = "HTML5 Formulario Modificar Empleado";
+    document.getElementById("tituloForm").innerHTML = "Modificar Empleado";
+    document.getElementById("btnEnviar").value = "Modificar";
+    document.getElementById("txtDni").value = dni;
+    document.getElementById("txtDni").readOnly = true;
+    document.getElementById("txtApellido").value = apellido;
+    document.getElementById("txtNombre").value = nombre;
+    document.getElementById("cboSexo").selectedIndex = sexoSeleccionado;
+    document.getElementById("txtLegajo").value = legajo;
+    document.getElementById("txtLegajo").readOnly = true;
+    document.getElementById("txtSueldo").value = sueldo;
+    document.getElementById(turnoSeleccionado).checked = true;
+}

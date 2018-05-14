@@ -121,3 +121,51 @@ function VerificarValidacionesLogin(): boolean {
 
     return boolRetorno;
 }
+
+function AdministrarModificar(dniEmpleado: string) {
+    (<HTMLInputElement>document.getElementById("hidModificar")).value = dniEmpleado;
+    (<HTMLFormElement>document.getElementById("frmModificar")).submit();
+}
+
+function ModificarEmpleado(dni: string, apellido: string, nombre: string, sexo: string, legajo: string, sueldo: string, turno: string, foto: string): void
+{
+    let turnoSeleccionado = turno;
+    let sexoSeleccionado = 0;
+    switch (sexo) {
+        case "Masculino":
+            sexoSeleccionado = 1;
+            break;
+        case "Femenino":
+            sexoSeleccionado = 2;
+            break;
+    }
+    switch (turno) {
+        case "tManana":
+            turnoSeleccionado = "tManana";
+            break;
+        case "tTarde":
+            turnoSeleccionado = "tTarde";
+
+            break;
+        case "tNoche":
+            turnoSeleccionado = "tNoche";
+            break;
+    }
+
+    document.title = "HTML5 Formulario Modificar Empleado";
+    (<HTMLElement>document.getElementById("tituloForm")).innerHTML = "Modificar Empleado";
+    (<HTMLInputElement>document.getElementById("btnEnviar")).value = "Modificar";
+
+    (<HTMLInputElement>document.getElementById("txtDni")).value = dni;
+    (<HTMLInputElement>document.getElementById("txtDni")).readOnly = true;
+    (<HTMLInputElement>document.getElementById("txtApellido")).value = apellido;
+    (<HTMLInputElement>document.getElementById("txtNombre")).value = nombre;
+    (<HTMLSelectElement>document.getElementById("cboSexo")).selectedIndex = sexoSeleccionado;
+    (<HTMLInputElement>document.getElementById("txtLegajo")).value = legajo;
+    (<HTMLInputElement>document.getElementById("txtLegajo")).readOnly = true;
+    (<HTMLInputElement>document.getElementById("txtSueldo")).value = sueldo;
+    (<HTMLInputElement>document.getElementById("hdnModificar")).value = dni;
+    (<HTMLInputElement>document.getElementById(turnoSeleccionado)).checked = true;
+
+
+}

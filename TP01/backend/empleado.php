@@ -1,5 +1,5 @@
 <?php
-    require("./persona.php");
+    require("persona.php");
     class Empleado extends Persona
     {
         protected $_legajo;
