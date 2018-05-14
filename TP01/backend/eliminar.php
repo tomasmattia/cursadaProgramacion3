@@ -23,6 +23,7 @@
     {
         $fabrica=new Fabrica("La pequenia fabrica del PHP",7);
         $fabrica->TraerDeArchivo("../archivos/empleados.txt");
+        unlink($empleado->GetPathFoto().".jpg");
         if($fabrica->EliminarEmpleado($empleado))
         {
             $fabrica->GuardarEnArchivo("../archivos/empleados.txt");

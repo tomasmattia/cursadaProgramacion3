@@ -99,10 +99,10 @@ function ModificarEmpleado(dni, apellido, nombre, sexo, legajo, sueldo, turno, f
     var turnoSeleccionado = turno;
     var sexoSeleccionado = 0;
     switch (sexo) {
-        case "Masculino":
+        case "masculino":
             sexoSeleccionado = 1;
             break;
-        case "Femenino":
+        case "femenino":
             sexoSeleccionado = 2;
             break;
     }
@@ -128,5 +128,6 @@ function ModificarEmpleado(dni, apellido, nombre, sexo, legajo, sueldo, turno, f
     document.getElementById("txtLegajo").value = legajo;
     document.getElementById("txtLegajo").readOnly = true;
     document.getElementById("txtSueldo").value = sueldo;
+    document.getElementById("hdnModificar").value = dni;
     document.getElementById(turnoSeleccionado).checked = true;
 }

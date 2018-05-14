@@ -132,10 +132,10 @@ function ModificarEmpleado(dni: string, apellido: string, nombre: string, sexo: 
     let turnoSeleccionado = turno;
     let sexoSeleccionado = 0;
     switch (sexo) {
-        case "Masculino":
+        case "masculino":
             sexoSeleccionado = 1;
             break;
-        case "Femenino":
+        case "femenino":
             sexoSeleccionado = 2;
             break;
     }
