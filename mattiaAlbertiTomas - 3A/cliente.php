@@ -18,7 +18,6 @@
                 fclose($archivoDeClientes);            
                 echo "Error en la carga";
             }
-            
             fclose($archivoDeClientes);        
             echo "Carga Exitosa";
         }
