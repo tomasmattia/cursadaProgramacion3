@@ -5,7 +5,7 @@
         private $sabor;
         private $precio;
 
-        public __construct($sabor,$precio)
+        public function __construct($sabor,$precio)
         {
             $this->sabor=$sabor;
             $this->precio=$precio;

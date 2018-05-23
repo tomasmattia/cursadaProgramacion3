@@ -23,7 +23,7 @@
             echo "Carga Exitosa";
         }
 
-        public __construct($nombre,$correo,$clave)
+        public function __construct($nombre,$correo,$clave)
         {
             $this->nombre=$nombre;
             $this->correo=$correo;
