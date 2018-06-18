@@ -58,12 +58,12 @@
 
         function EsSuperAdmin($request,$response,$next)
         {
+            echo "entro";
             $parametros=$request->getParsedBody();
             $nombre=$parametros['nombre'];
             $clave=$parametros['clave'];
             try
             {
-                echo "entro";
                 $usuario='root';
                 $pass='';
                 $objetoPDO = new PDO('mysql:host=localhost;dbname=cdcol;charset=utf8', $usuario, $pass);
